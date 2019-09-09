@@ -13,7 +13,7 @@
       <div>
         <b-button variant="primary" @click="getResult" v-if="!tested">Check</b-button>
         <h3 v-if="tested">
-          Similar: <span :class=" {'text-danger':result>10, 'text-warning':result>=5&&result<=10, 'text-success':result<10}">{{result}}</span>% 
+          Difference: <span :class=" {'text-danger':result>10, 'text-warning':result>=5&&result<=10, 'text-success':result<10}">{{result}}</span>% 
         </h3>
         <br><br> 
         <b-button variant="success" @click="resetAll" v-if="tested">Try Again!</b-button>
