@@ -1,6 +1,6 @@
 {
-  "name": "relpitch-training",
-  "short_name": "relpitch-training",
+  "name": "Relative Pitch Training",
+  "short_name": "Rel. Pitch Training",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "background_color": "#ffffff",
+  "theme_color": "#007bff"
 }
