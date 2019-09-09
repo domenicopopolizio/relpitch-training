@@ -67,6 +67,7 @@ export default {
 <style scoped>
 .instrument {
     display: grid;
+    width: 100%;
     grid-template-columns: 80% 20%;
 }
 .instrument > div {

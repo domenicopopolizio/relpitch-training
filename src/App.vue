@@ -1,21 +1,25 @@
 <template>
   <div id="app">  
-    <div>
+    <div class="logo">
       <img id="logo" src="./assets/icon.svg">
+    </div> 
+    <div class="instruments">
+      <div>
+        <instrument :freq="freq1" :distlt="distlt" :distgt="distgt" @input="guessed1=$event"></instrument>
+        <instrument :freq="freq2" :distlt="distlt" :distgt="distgt" @input="guessed2=$event"></instrument>
+      </div>
     </div>
-    <br>
-    <br>
-    <instrument :freq="freq1" :distlt="distlt" :distgt="distgt" @input="guessed1=$event"></instrument>
-    <instrument :freq="freq2" :distlt="distlt" :distgt="distgt" @input="guessed2=$event"></instrument>
-    <br><br>
-    
-    <b-button variant="primary" @click="getResult" v-if="!tested">Check</b-button>
-    <h3 v-if="tested">
-      Similar: <span :class=" {'text-danger':result>10, 'text-warning':result>=5&&result<=10, 'text-success':result<10}">{{result}}</span>% 
-    </h3>
-    <br><br>
-    
-    <b-button variant="success" @click="resetAll" v-if="tested">Try Again!</b-button>
+    <div class="interactions">
+      <div>
+        <b-button variant="primary" @click="getResult" v-if="!tested">Check</b-button>
+        <h3 v-if="tested">
+          Similar: <span :class=" {'text-danger':result>10, 'text-warning':result>=5&&result<=10, 'text-success':result<10}">{{result}}</span>% 
+        </h3>
+        <br><br> 
+        <b-button variant="success" @click="resetAll" v-if="tested">Try Again!</b-button>
+      </div>
+      
+    </div>
   </div>
 </template>
 
@@ -41,7 +45,7 @@ export default {
     this.resetAll()
   },
   methods: {
-    getResult(changeTest=true) {
+    getResult() {
       this.result = ((Math.max(this.guessed1, this.guessed2) - Math.min(this.guessed1, this.guessed2))*100/( (this.note+this.distgt) - (this.note-this.distlt) )).toFixed(2);
       this.tested = true; 
     },
@@ -93,15 +97,60 @@ export default {
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
 #app {
-  text-align: center;
   padding: 30px;
+  display: grid;
+  grid-template: 
+    'logo instruments' 1fr
+    'inter instruments' 1fr; 
+  
 }
 
+#app > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.instruments > div {
+  width: 100%;
+}
+ 
+#app > div > div  {
+  text-align: center;
+}
+
+.logo {
+  grid-area:  logo; 
+}
+.instruments {
+  grid-area:  instruments; 
+}
+.interactions {
+  grid-area:  inter; 
+}
+
+
 #logo {
-  width: 200px;
-  height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  width: 100%;
   box-shadow: 0px 0px 10px #c0c0c0;
   border-radius: 200px;
   padding: 20px;
 }
+
+
+@media only screen and (max-width: 750px) {
+   
+  #app { 
+    grid-template: 
+      'logo' 1fr
+      'instruments' 1fr
+      'inter' 1fr; 
+    
+  }
+
+}
+
 </style>
